@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h1>ToDo</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+        <form method="POST" class="p-3 shadow">
+             {% csrf_token %}
+            <div class="form-group">
+                <label for="task"></label>
+                    <input type="text" class="form-control" id="task" name="task" placeholder="Taskname">
+            </div>
+            <div class="form-group">
+                <label for="priority"></label>
+                    <input type="text" class="form-control" id="priority" name="priority" placeholder="Enter your Priority">
+            </div>
+            <div class="form-group">
+                <label for="date"></label>
+                    <input type="date" class="form-control" id="date" name="date" placeholder="Enter the date">
+            </div>
+
+       <div style="text-align: center;margin-top: 10px;">
+      <input  type="submit" class="btn btn-success">
+       </div>
+        </form>
+        </div>
+        <div class="col-md-6">
+            <h4>Task to be Completed</h4>
+            {% for i in task1 %}
+            <div class="shadow card">
+                <div class="card-body">
+                    <h5 class="card-title">{{i.name}}</h5>
+                    <p><b>{{i.priority}}</b></p>
+                    <p><b>{{i.date}}</b></p>
+{#                    <a class="btn btn-danger" href="{% url 'todo1app:delete' i.id %}">Done</a>#}
+                    <form method="post" action="{% url 'todo1app:delete' i.id %}" onsubmit="return myFunction(this)">
+                         {% csrf_token %}
+                        <button class="btn btn-danger" >Done</button>
+                    </form><br>
+                    <a class="btn btn-success" href="{% url 'todo1app:update' i.id %}">Update</a>
+                </div>
+            </div><br>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

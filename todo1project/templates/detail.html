@@ -1,0 +1,16 @@
+  {% extends 'base.html' %}
+  {% block content %}
+    <div class="shadow card">
+                <div class="card-body">
+                    <h5 class="card-title">{{task.name}}</h5>
+                    <p><b>{{task.priority}}</b></p>
+                    <p><b>{{task.date}}</b></p>
+{#                    <a class="btn btn-danger" href="{% url 'todo1app:delete' i.id %}">Done</a>#}
+                    <form method="post" action="{% url 'todo1app:cbvdelete' task.id %}">
+                         {% csrf_token %}
+                        <button class="btn btn-danger" >Done</button>
+                    </form><br>
+                    <a class="btn btn-success" href="{% url 'todo1app:cbvupdate' task.id %}">Update</a>
+                </div>
+            </div>
+  {% endblock %}
